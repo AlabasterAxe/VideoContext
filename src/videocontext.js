@@ -66,6 +66,12 @@ export default class VideoContext {
     ) {
         this._canvas = canvas;
         this._endOnLastSourceEnd = endOnLastSourceEnd;
+        this._viewport = {
+            minX: -500,
+            minY: -350,
+            maxX: 500,
+            maxY: 350
+        };
 
         this._gl = canvas.getContext(
             "webgl",

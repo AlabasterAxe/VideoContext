@@ -23,6 +23,9 @@ class DestinationNode extends ProcessingNode {
 
         super(gl, renderGraph, definition, definition.inputs, false);
         this._displayName = TYPE;
+        this._aspectRatio = 1.5;
+        this._zoom = 1.0;
+        this._offset = { x: 0, y: 0 };
     }
 
     _render() {
@@ -45,6 +48,20 @@ class DestinationNode extends ProcessingNode {
                 gl.bindTexture(gl.TEXTURE_2D, texture);
             }
 
+            const offset = { x: 0, y: 0 };
+            const canvasAspectRatio = gl.canvas.width / gl.canvas.height;
+            let width = gl.canvas.width;
+            let height = gl.canvas.height;
+            if (canvasAspectRatio < this._aspectRatio) {
+                width = gl.canvas.width * this._zoom;
+                height = width / this._aspectRatio;
+            } else {
+                height = gl.canvas.height * this._zoom;
+                width = height * this._aspectRatio;
+            }
+            offset.x = (gl.canvas.width - width) / 2;
+            offset.y = (gl.canvas.height - height) / 2;
+            gl.viewport(offset.x + this._offset.x, offset.y + this._offset.y, width, height);
             gl.drawArrays(gl.TRIANGLES, 0, 6);
         });
     }
