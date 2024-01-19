@@ -13,7 +13,7 @@ class DestinationNode extends ProcessingNode {
      *
      * You should not instantiate this directly.
      */
-    constructor(gl, renderGraph) {
+    constructor(gl, renderGraph, aspectRatio) {
         let definition = {
             fragmentShader,
             vertexShader,
@@ -23,7 +23,7 @@ class DestinationNode extends ProcessingNode {
 
         super(gl, renderGraph, definition, definition.inputs, false);
         this._displayName = TYPE;
-        this._aspectRatio = 1.5;
+        this._aspectRatio = aspectRatio || 1.5;
         this._zoom = 1.0;
         this._offset = { x: 0, y: 0 };
     }

@@ -61,7 +61,8 @@ export default class VideoContext {
             endOnLastSourceEnd = true,
             useVideoElementCache = true,
             videoElementCacheSize = 6,
-            webglContextAttributes = {}
+            webglContextAttributes = {},
+            aspectRatio = 1.5,
         } = {}
     ) {
         this._canvas = canvas;
@@ -112,7 +113,7 @@ export default class VideoContext {
         this._playbackRate = 1.0;
         this._volume = 1.0;
         this._sourcesPlaying = undefined;
-        this._destinationNode = new DestinationNode(this._gl, this._renderGraph);
+        this._destinationNode = new DestinationNode(this._gl, this._renderGraph, aspectRatio);
 
         this._callbacks = new Map();
         Object.keys(VideoContext.EVENTS).forEach(name =>
