@@ -62,7 +62,7 @@ export default class VideoContext {
             useVideoElementCache = true,
             videoElementCacheSize = 6,
             webglContextAttributes = {},
-            aspectRatio = 1.5,
+            aspectRatio = 1.5
         } = {}
     ) {
         this._canvas = canvas;
