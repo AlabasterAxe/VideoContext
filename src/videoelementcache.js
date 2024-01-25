@@ -14,21 +14,26 @@ class VideoElementCache {
     init() {
         if (!this._cacheItemsInitialised) {
             for (let cacheItem of this._cacheItems) {
-                try {
-                    cacheItem.element.play().then(
-                        () => {
-                            // Pause any elements not in the "playing" state
-                            if (!cacheItem.isPlaying()) {
-                                cacheItem.element.pause();
+                if (cacheItem.isPlaying()) {
+                    try {
+                        cacheItem.element.play().then(
+                            () => {
+                                // Pause any elements not in the "playing" state
+                                if (!cacheItem.isPlaying()) {
+                                    cacheItem.element.pause();
+                                }
+                            },
+                            e => {
+                                if (e.name !== "NotSupportedError") throw e;
                             }
-                        },
-                        e => {
-                            if (e.name !== "NotSupportedError") throw e;
-                        }
-                    );
-                } catch (e) {
-                    //console.log(e.name);
+                        ).catch((e)=>{
+                            console.log(e);
+                        });
+                    } catch (e) {
+                        //console.log(e.name);
+                    }
                 }
+
             }
         }
         this._cacheItemsInitialised = true;
