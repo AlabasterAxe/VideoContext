@@ -253,7 +253,7 @@ class MediaNode extends SourceNode {
                 this._playbackRateUpdated = false;
             }
             if (!this._isElementPlaying) {
-                this._element.play().then(()=>{
+                this._element.play().then(() => {
                     if (this._stretchPaused) {
                         this._element.pause();
                     }
