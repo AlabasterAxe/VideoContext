@@ -25,11 +25,11 @@ class VideoElementCache {
                                         cacheItem.element.pause();
                                     }
                                 },
-                                e => {
+                                (e) => {
                                     if (e.name !== "NotSupportedError") throw e;
                                 }
                             )
-                            .catch(e => {
+                            .catch((e) => {
                                 console.log(e);
                             });
                     } catch (e) {
